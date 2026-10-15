@@ -1,0 +1,27 @@
+import argparse
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Multi-Behavior Recommendation')
+    parser.add_argument('--gpu_id', type=str, default='0', help='GPU ID')
+    parser.add_argument('--dataset', type=str, default='taobao', help='Dataset name')
+    parser.add_argument('--data_dir', type=str, default='./data', help='Directory containing the data')
+    parser.add_argument('--checkpoint_dir', type=str, default='./checkpoint', help='Directory of model checkpoint')
+    parser.add_argument('--load_checkpoint', action='store_true', help='Load model checkpoint')
+    parser.add_argument('--batch_size', type=int, default=1024, help='Batch size')
+    parser.add_argument('--lr', type=float, default=5e-4, help='Learning rate')
+    parser.add_argument('--weight_decay', type=float, default=0, help='Weight decay')
+    parser.add_argument('--emb_dim', type=int, default=64, help='Embedding dimension')
+    parser.add_argument('--num_epochs', type=int, default=100, help='Number of epochs')
+    parser.add_argument('--seed', type=int, default=42, help='Random seed')
+    parser.add_argument('--device', type=str, default='cuda:0', help='Training device')
+    parser.add_argument('--topk', type=int, nargs='+', default=[10, 50], help='Top-k items, the first one is used for model selection')
+    parser.add_argument('--alpha', type=float, default=1.0, help='Contrastive learning weight')
+    parser.add_argument('--gamma', type=float, default=0.1, help='Causal diffusion loss weight')
+    parser.add_argument('--diff_steps', type=int, default=50, help='Diffusion steps')
+    parser.add_argument('--sampling_steps', type=int, default=3, help='Inference sampling steps')
+    parser.add_argument('--noise_scale', type=float, default=0.01, help='Noise scale')
+    parser.add_argument('--noise_min', type=float, default=0.1, help='Minimum noise level')
+    parser.add_argument('--noise_max', type=float, default=1.0, help='Maximum noise level')
+    parser.add_argument('--early_stop', type=int, default=10, help='Early stop patience')
+    return parser.parse_args()
